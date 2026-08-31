@@ -6,6 +6,12 @@ const app = express();
 
 app.use(express.json());
 
+// Tag every response with which instance handled it
+app.use((req, res, next) => {
+    res.setHeader('X-Served-By', process.env.INSTANCE_NAME || 'unknown');
+    next();
+});
+
 app.get('/health', (req, res) => {
     res.json({ status: 'ok' });
 });
