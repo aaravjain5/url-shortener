@@ -4,6 +4,7 @@ const { redisClient, connectRedis } = require('../src/config/redisClient');
 
 beforeAll(async () => {
     await connectRedis();
+    await redisClient.flushDb(); // clear test DB before running any tests
 });
 
 afterAll(async () => {
